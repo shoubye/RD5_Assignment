@@ -13,7 +13,8 @@ create table transaction
 (
     transaction int auto_increment primary key,
     transtype int,
-    balance int default '1000'
+    trade int,
+    transdate datetime
     
 )
 
@@ -24,3 +25,8 @@ values ('Jeremy','Lin', 2),('Jeremy','chan', 4),('Jeremy','wang', 6);
 
 
 foreign key (account) references member(account);
+
+
+
+
+

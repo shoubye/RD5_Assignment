@@ -7,6 +7,21 @@ session_start();
   else 
   $account = " ";
 
+  
+  $link = @mysqli_connect("localhost", "root", "root", "bank", 8889) or die(mysqli_connect_error());
+  $result = mysqli_query($link, "set names utf8");  
+
+  $account = $_SESSION["account"];
+
+  $Text5 =<<<SqlQuery
+  SELECT balance FROM member where account = '$account';
+  SqlQuery;        
+  $result = mysqli_query ($link, $Text5); 
+
+  $balance["balance"] = mysqli_fetch_assoc($result);
+  $r = implode("",$balance["balance"]);
+
+
 
   //確認
   if (isset($_GET["okbutton"]))
@@ -20,11 +35,11 @@ session_start();
             break;
 
             case '4':  //提款
-                header("Location: secret.php");
+              header("Location: secretqq.php");
             break;
              
             case '6':  //餘額查詢
-              
+              echo "<script>alert('目前餘額為：$r');</script>";
             break;
 
             case '8':  //明細查詢
@@ -47,9 +62,17 @@ session_start();
     header("Location: index.php");
   }
 
-  //註冊
+  //註冊(登入時不能註冊)
   if (isset($_GET["okbutton3"]))
   {
+    if (isset($_SESSION["account"]))
+    {  
+      $_SESSION ["lastPage"]= "detail.php";
+      header("Location: index.php");
+      exit();
+        
+    }
+    else
     header("Location: signup.php");
   }
 
@@ -80,15 +103,14 @@ A:hover {text-decoration: none; color: FF7700} */
     <form  action = "index.php?radiobox=">
    
         <div class="form-group row">
-   
+        <table style="border:3px #FFD382 dashed;" cellpadding="10" border='1' align="center">
           <label class="col-4"></label> 
 
               <div class="col-8">
                 <br>
                 <font face="link" color="#415FD9" size="7"><u><i>線上網銀系統</i></u></font><br>        
-                <font face="link" color="#685AA3" size="4"><?php echo "歡迎光臨：" . $account ?></font><br>
-                <font face="link" color="#685AA3" size="4"><?php echo "目前餘額： " ?></font><br>
-                <font face="link" color="#D14571" size="4">請選擇服務項目：</font>
+                <font face="link" color="#D14571" size="5"><?php echo "歡迎光臨：" . $account ?></font><br><br>
+    
                 
 
                 <div class="custom-control custom-radio custom-control-inline">
@@ -114,11 +136,8 @@ A:hover {text-decoration: none; color: FF7700} */
                     <label for="radio_3" class="custom-control-label">明細查詢</label>
                 </div>
 
-
-
                 <div class="modal-footer">
-                    <div class="col-12 ">
-                       
+                    <div class="col-12 ">                       
 
                     <input name="okbutton" type="submit" class="btn btn-outline-success" value ="確認"/> 
                     <input name="okbutton1" type="submit" class="btn btn-outline-info" value ="登入"/> 
@@ -130,7 +149,7 @@ A:hover {text-decoration: none; color: FF7700} */
 
           </div>
       </div> 
-
+ 
     </form>
 
 

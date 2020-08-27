@@ -2,10 +2,10 @@
 
 session_start();
 
-//未登入時，跳回登入畫面
+// 未登入時，跳回登入畫面
 if (!isset($_SESSION["account"]))
 {  
-	$_SESSION ["lastPage"]= "secret.php";
+	$_SESSION ["lastPage"]= "secretqq.php";
   header("Location: login.php");
   exit();
 	
@@ -19,7 +19,7 @@ if (isset($_POST["okbutton"]))
 
 
 //確認
-if (isset($_POST["haha"]))
+if (isset($_POST["hehe"]))
 {
     // 連線資料庫
     $link = @mysqli_connect("localhost", "root", "root", "bank", 8889) or die(mysqli_connect_error());
@@ -27,41 +27,34 @@ if (isset($_POST["haha"]))
 
     $account = $_SESSION["account"];
 
-    $Text3 =<<<SqlQuery
+    $Text6 =<<<SqlQuery
     SELECT balance FROM member where account = '$account';
     SqlQuery;        
-    $result = mysqli_query ($link, $Text3); 
+    $result = mysqli_query ($link, $Text6); 
     // var_dump($result);
+  
 
-    
     $balance["balance"] = mysqli_fetch_assoc($result);  
     // var_dump($balance["balance"]);
     
     $r = implode("",$balance["balance"]);//轉成數字串
-    
-    if($_POST["text"] >50000)
-    echo "<script>alert('存款上限為５００００，請輸入５００００以下的金額');</script>";
-      else
-    {
-    $r = $r + $_POST["text"]; 
-    echo "<script>alert('目前餘額為：$r');</script>";             
-    }
 
-    $Text4 =<<<SqlQuery
+    
+    if($r - $_POST["text"] >= 0)
+    {
+    $r = $r - $_POST["text"];    
+    echo "<script>alert('目前餘額為：$r');</script>";
+    }
+    else
+    echo "<script>alert('您的餘額不足');</script>";
+
+
+    $Text7 =<<<SqlQuery
     update member set balance = $r where account = $account;
     SqlQuery;        
-    $result = mysqli_query ($link, $Text4); 
+    $result = mysqli_query ($link, $Text7); 
 
-
-
-    // $date = date();
-
-    // $Text8 =<<<SqlQuery
-    // insert into transaction (transtype ,trad , transdate) 
-    // values (deposit ,);
-    // SqlQuery;        
-    // $result = mysqli_query ($link, $Text8); 
-  
+    
 }
 
 ?>
@@ -77,8 +70,7 @@ if (isset($_POST["haha"]))
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<form method = "post" action = "secret.php" >
-
+<form method = "post" action = "secretqq.php">
 
       <div >
           <label style="font-size:15px;" for="fname">請輸入金額:</label>
@@ -87,10 +79,10 @@ if (isset($_POST["haha"]))
 
     
       <div >
-            <input name="haha" type="submit" class="btn btn-success" value ="確認"/>
+            <input name="hehe" type="submit" class="btn btn-success" value ="確認"/>
             <input name="okbutton" type="submit" class="btn btn-info" value ="回首頁"/>
       </div>
-      
+
 
 </form>
 </body>

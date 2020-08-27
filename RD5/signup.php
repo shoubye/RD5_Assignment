@@ -21,7 +21,12 @@ if (isset($_POST["btnOK1"]))
 
   $result = mysqli_query ($link, $Text1);
 
-  header("Location: index.php");   //跳轉到首頁
+  if($account=null && $password =null && $account!= $row["account"])
+   {
+    echo "註冊成功";
+   }
+   else
+   header("Location: signup.php");
 }
 
  //重設
@@ -44,33 +49,34 @@ if (isset($_POST["btnOK1"]))
 <body>
     
 <form id="form1" name="form1" method="post" action="signup.php">
-  <table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
+  <table style="border:8px #FFD382 groove;" cellpadding="10" border='0' align="center">
 
 
     <tr>
-      <td colspan="2" align="center" bgcolor="#CCCCCC"><font color="#000">會  員  註  冊</font></td>
+      <td colspan="2" align="center" bgcolor="#A6D989"><font face="link" color="#4766FC" size="5"><i>會  員  註  冊</i></font></td>
     </tr>
 
-    <tr>
-      <td width="80" align="center" valign="baseline">姓名：</td>
+    <!-- <tr>
+      <td width="80" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">姓名：</font></td>
       <td valign="baseline"><input type="text" name="qqq" id="qqq" /></td>
-    </tr>
+    </tr> -->
 
     <tr>
-      <td width="80" align="center" valign="baseline">帳號：</td>
+      <td width="100" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">帳 號：</font></td>
       <td valign="baseline"><input type="text" name="txtUserName1" id="txtUserName1" /></td>
     </tr>
 
 
     <tr>
-      <td width="80" align="center" valign="baseline">密碼：</td>
+      <td width="100" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">密碼：</font></td>
       <td valign="baseline"><input type="password" name="txtPassword1" id="txtPassword1" /></td>
     </tr>
 
 
 
     <tr>
-      <td colspan="2" align="center" bgcolor="#CCCCCC"><input type="submit" name="btnOK1" id="btnOK1" value="註冊" />
+      <td colspan="2" align="center" bgcolor="#A6D989">
+      <input type="submit" name="btnOK1" id="btnOK1" value="註冊" />
       <input type="reset" name="btnReset" id="btnReset" value="重填" />
       <input type="submit" name="btnHome" id="btnHome" value="回首頁" />
       </td>
