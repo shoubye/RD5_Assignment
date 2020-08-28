@@ -106,7 +106,7 @@ A:hover {text-decoration: none; color: FF7700} */
         <table style="border:3px #FFD382 dashed;" cellpadding="10" border='1' align="center">
           <label class="col-4"></label> 
 
-              <div class="col-8">
+              <div>
                 <br>
                 <font face="link" color="#415FD9" size="7"><u><i>線上網銀系統</i></u></font><br>        
                 <font face="link" color="#D14571" size="5"><?php echo "歡迎光臨：" . $account ?></font><br><br>

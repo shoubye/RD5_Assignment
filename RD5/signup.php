@@ -10,8 +10,8 @@ if (isset($_POST["btnOK1"]))
   $result = mysqli_query($link, "set names utf8");  
 
   //執行SQL敘述
-
-  $name = $_POST["qqq"];
+  
+  // $name = $_POST["qqq"];
   $account = $_POST["txtUserName1"];
   $password =$_POST["txtPassword1"];
 
@@ -21,12 +21,6 @@ if (isset($_POST["btnOK1"]))
 
   $result = mysqli_query ($link, $Text1);
 
-  if($account=null && $password =null && $account!= $row["account"])
-   {
-    echo "註冊成功";
-   }
-   else
-   header("Location: signup.php");
 }
 
  //重設
@@ -71,7 +65,6 @@ if (isset($_POST["btnOK1"]))
       <td width="100" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">密碼：</font></td>
       <td valign="baseline"><input type="password" name="txtPassword1" id="txtPassword1" /></td>
     </tr>
-
 
 
     <tr>

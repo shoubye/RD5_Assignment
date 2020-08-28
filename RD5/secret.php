@@ -8,7 +8,6 @@ if (!isset($_SESSION["account"]))
 	$_SESSION ["lastPage"]= "secret.php";
   header("Location: login.php");
   exit();
-	
 }
 
 //回首頁
@@ -32,7 +31,6 @@ if (isset($_POST["haha"]))
     SqlQuery;        
     $result = mysqli_query ($link, $Text3); 
     // var_dump($result);
-
     
     $balance["balance"] = mysqli_fetch_assoc($result);  
     // var_dump($balance["balance"]);
@@ -47,6 +45,9 @@ if (isset($_POST["haha"]))
     echo "<script>alert('目前餘額為：$r');</script>";             
     }
 
+
+
+    //傳回資料庫
     $Text4 =<<<SqlQuery
     update member set balance = $r where account = $account;
     SqlQuery;        
@@ -54,13 +55,15 @@ if (isset($_POST["haha"]))
 
 
 
-    // $date = date();
+    //明細
+    $trade = $_POST["text"]; 
+    $date = date('Y-m-d H:i:s');
 
-    // $Text8 =<<<SqlQuery
-    // insert into transaction (transtype ,trad , transdate) 
-    // values (deposit ,);
-    // SqlQuery;        
-    // $result = mysqli_query ($link, $Text8); 
+    $Text8 =<<<SqlQuery
+    insert into transaction (account, transtype ,trade , transdate) 
+    values ('$account','deposit' ,'$trade', '$date');
+    SqlQuery;        
+    $result = mysqli_query ($link, $Text8);
   
 }
 

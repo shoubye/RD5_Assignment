@@ -47,6 +47,7 @@ session_start();
             if (isset($_SESSION["lastPage"]))
               header(sprintf("Location: %s", $_SESSION["lastPage"]));
             else
+            // echo "沒有此帳號";
               header("Location: index.php");//跳轉到首頁
             exit();
           }           

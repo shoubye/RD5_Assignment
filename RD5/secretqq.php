@@ -54,7 +54,18 @@ if (isset($_POST["hehe"]))
     SqlQuery;        
     $result = mysqli_query ($link, $Text7); 
 
-    
+
+
+    $trade = $_POST["text"]; 
+    $date = date('Y-m-d H:i:s');
+
+    $Text9 =<<<SqlQuery
+    insert into transaction (account, transtype ,trade , transdate) 
+    values ('$account','withdraw' ,'$trade', '$date');
+    SqlQuery;        
+    $result = mysqli_query ($link, $Text9);
+
+
 }
 
 ?>

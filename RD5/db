@@ -12,7 +12,8 @@ create table member
 create table transaction
 (
     transaction int auto_increment primary key,
-    transtype int,
+    account varchar(20),
+    transtype varchar(20),
     trade int,
     transdate datetime
     
