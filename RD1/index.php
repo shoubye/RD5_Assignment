@@ -1,52 +1,8 @@
 <?php
 
-
-   if(isset($_POST["okbutton"]))
-   {
-    //縣市
-    $_SESSION["123"] = $_POST["city"];
-    echo $_POST["city"] ;
-  
-   }
-
-   //預報
-    // $_SESSION["456"] = $_POST["day"];
-    // // echo $_POST["day"] ;
-
-    // //積雨量
-    // $_SESSION["789"] = $_POST["hour"];
-    // echo $_POST["hour"] ;
+   session_start();
 
    
-    // urlencode($_POST["city"]);
-    // echo $_POST["city"];
-
-
-    $url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-0EF10C78-E76B-49E3-BD74-05B21416C3F5&format=JSON&locationName=".urlencode($_POST["city"])."&sort=time";
-    $data = file_get_contents($url);  // PHP get data from url
-    $json = json_decode($data, true);  // Decode json data    
-    // var_dump($json);
-    // var_dump($json['records']['location'][1]['locationName']);// 查詢資料
-
-    
-    $datasetDescription = $json["records"]["datasetDescription"];
-    $locationName = $json["records"]["location"][0]["locationName"];
-    $elementName = $json["records"]["location"][0]["weatherElement"][0]["elementName"];
-    $startTime = $json["records"]["location"][0]["weatherElement"][0]["time"][0]["startTime"];
-    $endTime = $json["records"]["location"][0]["weatherElement"][0]["time"][0]["endTime"];
-    $parameterName = $json["records"]["location"][0]["weatherElement"][0]["time"][0]["parameter"]["parameterName"];
-    $parameterValue = $json["records"]["location"][0]["weatherElement"][0]["time"][0]["parameter"]["parameterValue"];
-
-
-    var_dump($datasetDescription);
-    var_dump($locationName);
-    var_dump($elementName);
-    var_dump($startTime);
-    var_dump($endTime);
-    var_dump($parameterName);
-    var_dump($parameterValue);
-
-
 ?>
 
 
@@ -65,13 +21,12 @@
 
 
 <form  method = "post">
-        <font face="link" color="#FA7A8E" size="6"><u><i>個人氣象站</i></u></font><br>
+        <font face="link" color="#FA7A8E" size="7"><u><i>個人氣象站</i></u></font><br>
         <div class="form-group row">
             
             <label for="select" class="custom-control" >請選擇縣/市：</label> 
             <div class="custom-control-inline">            
-            <select id="select" name="city" >
-                <option></option>
+            <select id="select" name="city" > 
                 <option value="基隆市">基隆市</option>
                 <option value="臺北市">臺北市</option>
                 <option value="新北市">新北市</option>
@@ -97,18 +52,53 @@
             </select>
             </div>
 
-
-
         <div class="custom-control">
-            <input name="okbutton" type="submit" class="btn btn-outline-info btn-sm" value ="未來２天天氣："/>
+            <input name="okbutton3" type="submit" class="btn btn-outline-info btn-sm" value ="當前天氣"/>
+        </div>
+            
+        <div class="custom-control">
+            <input name="okbutton1" type="submit" class="btn btn-outline-info btn-sm" value ="未來２天天氣："/>
         </div>
 
         <div class="custom-control">
-            <input name="okbutton" type="submit" class="btn btn-outline-info btn-sm" value ="未來一週天氣"/>
+            <input name="okbutton2" type="submit" class="btn btn-outline-info btn-sm" value ="未來一週天氣"/>
+            
         </div>
 
+
+
+        <label for="select" class="custom-control" >積雨量查詢：</label> 
+            <div class="custom-control-inline">            
+            <select id="select" name="rain" >
+   
+                <option value="RAIN">過去1小時</option>
+                <option value="HOUR_24">過去24小時</option>
+                
+            </select>
+            </div>
+
         <div class="custom-control">
-            <input name="okbutton" type="submit" class="btn btn-success btn-sm" value ="查詢"/>
+            <input name="okbutton4" type="submit" class="btn btn-outline-success btn-sm" value ="查詢"/>
+        </div>
+
+           
+
+        <hr size="8" align="center" noshade width="100%" color="A702CF">
+
+        <div class="custom-control">
+        <?php
+            if(isset($_POST["okbutton1"]))
+             require_once("weather2.php");
+            
+             else if (isset($_POST["okbutton2"]))
+             require_once("weather7.php");
+
+             else if(isset($_POST["okbutton3"]))
+             require_once("current.php");
+
+             else if(isset($_POST["okbutton4"]))
+             require_once("rain.php");
+        ?>   
         </div>
 
 </form>
