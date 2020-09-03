@@ -9,19 +9,17 @@ if (isset($_POST["btnOK1"]))
   $link = @mysqli_connect("localhost", "root", "root", "bank", 8889) or die(mysqli_connect_error());
   $result = mysqli_query($link, "set names utf8");  
 
-  //執行SQL敘述
-  
-  // $name = $_POST["qqq"];
-  $account = $_POST["txtUserName1"];
+  $account = $_POST["txtUserName1"];       
   $password =$_POST["txtPassword1"];
 
   $Text1 =<<<SqlQuery
-  INSERT INTO member (name, account ,password) VALUES ('$name','$account','$password');
+  INSERT INTO member (account ,password) VALUES ('$account','$password');
   SqlQuery;
-
   $result = mysqli_query ($link, $Text1);
 
+  echo "<script>alert('註冊成功');</script>";
 }
+ 
 
  //重設
   if (isset($_POST["btnHome"]))
@@ -49,11 +47,6 @@ if (isset($_POST["btnOK1"]))
     <tr>
       <td colspan="2" align="center" bgcolor="#A6D989"><font face="link" color="#4766FC" size="5"><i>會  員  註  冊</i></font></td>
     </tr>
-
-    <!-- <tr>
-      <td width="80" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">姓名：</font></td>
-      <td valign="baseline"><input type="text" name="qqq" id="qqq" /></td>
-    </tr> -->
 
     <tr>
       <td width="100" align="center" valign="baseline"> <font face="link" color="#D14571" size="4">帳 號：</font></td>

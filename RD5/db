@@ -6,7 +6,7 @@ create table member
     name varchar(20),
     account varchar(20),
     password int,
-    balance varchar(20) default '1000'
+
 );
 
 create table transaction

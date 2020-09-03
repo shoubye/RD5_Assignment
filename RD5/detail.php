@@ -32,38 +32,34 @@
 
     <div class="container">
         <br><br>
-        <h2>明細查詢</h2>        
+        <h2 >明細查詢</h2>        
         <table class="table table-striped">
 
             <thead>
             <tr>
-                <th>使用者</th>
+                <th>會員</th>
                 <th>存款／提款</th>
                 <th>日期</th>
                 <th>交易金額</th>
             </tr>
             </thead>
-
-
             <tbody>
+                <?php while($row= mysqli_fetch_assoc($result)) {?>           
 
-
-            <?php while($row= mysqli_fetch_assoc($result)) {
-            ?>           
-
-            <tr>
-                <td>  <?php echo $row["account"];?>  </td>
-                <td>  <?php echo $row["transtype"];?>  </td>
-                <td>  <?php echo $row["transdate"];?>  </td>
-                <td>  <?php echo $row["trade"];?>      </td>              
-            </tr>           
+                <tr>
+                    <td>  <?php echo $row["account"];  ?>  </td>
+                    <td>  <?php echo $row["transtype"];?>  </td>
+                    <td>  <?php echo $row["transdate"];?>  </td>
+                    <td>  <?php echo $row["trade"];    ?>  </td>              
+                </tr>           
 
             <?php } ?> 
       
             </tbody>
-        </table>
-        </div>
 
-    
+        </table>
+    </div>
+
+
 </body>
 </html>

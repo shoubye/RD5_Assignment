@@ -39,12 +39,11 @@ if (isset($_POST["haha"]))
     
     if($_POST["text"] >50000)
     echo "<script>alert('存款上限為５００００，請輸入５００００以下的金額');</script>";
-      else
-    {
+    else
+    { 
     $r = $r + $_POST["text"]; 
-    echo "<script>alert('目前餘額為：$r');</script>";             
+    echo "<script>alert('您的存款金額為：".$_POST["text"]."，目前餘額為：$r');</script>";             
     }
-
 
 
     //傳回資料庫
@@ -54,8 +53,7 @@ if (isset($_POST["haha"]))
     $result = mysqli_query ($link, $Text4); 
 
 
-
-    //明細
+    //新增明細
     $trade = $_POST["text"]; 
     $date = date('Y-m-d H:i:s');
 
@@ -85,15 +83,10 @@ if (isset($_POST["haha"]))
 
       <div >
           <label style="font-size:15px;" for="fname">請輸入金額:</label>
-          <input type="text" id="text" name="text" style="font-size:20px"><br>
+          <input type="text" id="text" name="text" style="font-size:20px">
+          <input name="haha" type="submit" class="btn btn-success" value ="確認"/>
+          <input name="okbutton" type="submit" class="btn btn-info" value ="回首頁"/>
       </div>  
-
-    
-      <div >
-            <input name="haha" type="submit" class="btn btn-success" value ="確認"/>
-            <input name="okbutton" type="submit" class="btn btn-info" value ="回首頁"/>
-      </div>
-      
 
 </form>
 </body>

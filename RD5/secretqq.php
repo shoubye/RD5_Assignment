@@ -43,22 +43,22 @@ if (isset($_POST["hehe"]))
     if($r - $_POST["text"] >= 0)
     {
     $r = $r - $_POST["text"];    
-    echo "<script>alert('目前餘額為：$r');</script>";
+    echo "<script>alert('您的提款金額為：".$_POST["text"]."，目前餘額為：$r');</script>";
     }
     else
-    echo "<script>alert('您的餘額不足');</script>";
+    echo "<script>alert('您的餘額不足，請重新輸入');</script>";
 
-
+    //回傳餘額
     $Text7 =<<<SqlQuery
     update member set balance = $r where account = $account;
     SqlQuery;        
     $result = mysqli_query ($link, $Text7); 
 
 
-
     $trade = $_POST["text"]; 
     $date = date('Y-m-d H:i:s');
 
+    //新增明細
     $Text9 =<<<SqlQuery
     insert into transaction (account, transtype ,trade , transdate) 
     values ('$account','withdraw' ,'$trade', '$date');
@@ -85,14 +85,16 @@ if (isset($_POST["hehe"]))
 
       <div >
           <label style="font-size:15px;" for="fname">請輸入金額:</label>
-          <input type="text" id="text" name="text" style="font-size:20px"><br>
+          <input type="text" id="text" name="text" style="font-size:20px">
+          <input name="hehe" type="submit" class="btn btn-success" value ="確認"/>
+          <input name="okbutton" type="submit" class="btn btn-info" value ="回首頁"/>
       </div>  
 
     
-      <div >
+      <!-- <div >
             <input name="hehe" type="submit" class="btn btn-success" value ="確認"/>
             <input name="okbutton" type="submit" class="btn btn-info" value ="回首頁"/>
-      </div>
+      </div> -->
 
 
 </form>
